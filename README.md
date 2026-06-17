@@ -167,7 +167,7 @@ automation framework built on the same application:
 **Emmanuel Adeniran**
 QA Engineer
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](www.linkedin.com/in/edenqa)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue)](https://www.linkedin.com/in/edenqa)
 [![GitHub](https://img.shields.io/badge/GitHub-qa--eden-black)](https://github.com/qa-eden)
 
 ---
