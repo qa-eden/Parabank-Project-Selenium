@@ -18,7 +18,11 @@ public class LoginPage extends BasePage {
 	@FindBy(xpath="//input[@value='Log In']") WebElement btnLogin;
 	@FindBy(xpath="//a[normalize-space()='Forgot login info?']") WebElement btnForgotLogin;
 	@FindBy(xpath="//a[normalize-space()='Register']") WebElement btnRegister;
-	
+	@FindBy(xpath="//a[normalize-space()='Log Out']") WebElement btnLogout;
+	@FindBy(xpath="//h1[normalize-space()='Accounts Overview']") WebElement headingAccountsOverview;
+	@FindBy(xpath="//p[@class='error']") WebElement errorMsg;
+	@FindBy(xpath="//h1[normalize-space()='Error!']") WebElement loginError;
+		
 	// Actions
 	//1. Validate Login Page
 	public Boolean logoDisplay()
@@ -48,5 +52,39 @@ public class LoginPage extends BasePage {
 		btnLogin.click();
 	}
 	
+	public void clickLogout()
+	{
+		btnLogout.click();
+	}
+	
+	public Boolean isAccountsOverviewDisplayed()
+	{
+		try
+		{
+			return(headingAccountsOverview.isDisplayed());
+		} catch(Exception e)
+		{
+			return false;
+		}
+	}
+	
+	public String validateErrorMsg()
+	{
+		try {
+			return(errorMsg.getText());
+		}catch (Exception e) {
+			return(e.getMessage());
+		}
+	}
+	
+	public String errorLogin()
+	{
+		try {
+			return (loginError.getText());
+		} catch (Exception e) {
+		return(e.getMessage());
+		}
+	}
 	
 }
+
