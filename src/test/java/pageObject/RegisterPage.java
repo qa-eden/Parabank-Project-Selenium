@@ -12,7 +12,7 @@ public class RegisterPage extends BasePage{
 	}
 	
 	// Locators
-@FindBy(xpath="//a[normalize-space()='Register']") WebElement fname;
+@FindBy(xpath="//input[@id='customer.firstName']") WebElement fname;
 @FindBy(xpath="//input[@id='customer.lastName']") WebElement lname;
 @FindBy(xpath="//input[@id='customer.address.street']") WebElement address_street;
 @FindBy(xpath="//input[@id='customer.address.city']") WebElement address_city;
@@ -22,8 +22,11 @@ public class RegisterPage extends BasePage{
 @FindBy(xpath="//input[@id='customer.ssn']") WebElement customer_ssn;
 @FindBy(xpath="//input[@id='customer.username']") WebElement customer_username;
 @FindBy(xpath="//input[@id='customer.password']") WebElement customer_password;
-@FindBy(xpath="//input[@id='repeatedPassword']") WebElement confirm_Password;
+@FindBy(xpath="//input[@id='repeatedPassword']") WebElement confirm_password;
 @FindBy(xpath="//input[@value='Register']") WebElement register;
+@FindBy(xpath="//div[@id='rightPanel']//p") WebElement successMsg;
+@FindBy(xpath="//span[@id='customer.username.errors']") WebElement usernameErrorMsg;
+@FindBy(xpath="//span[@id='repeatedPassword.errors']") WebElement passwordErrorMsg;
 
 public void inputFirstName(String value) {
 	fname.sendKeys(value);
@@ -66,7 +69,7 @@ public void inputPassword(String value) {
 }
 
 public void inputConfPassword(String value) {
-	confirm_Password.sendKeys(value);
+	confirm_password.sendKeys(value);
 }
 
 public void clickRegister()
@@ -74,13 +77,31 @@ public void clickRegister()
 	register.click();
 }
 
+public String successRegister()
+{
+	try {
+		return(successMsg.getText());
+	} catch(Exception e) {
+		return(e.getMessage());
+	}
+}
 
+public String usernameError()
+{
+	try {
+		return(usernameErrorMsg.getText());
+	} catch(Exception e) {
+		return(e.getMessage());
+	}
+}
 
-
-
-
-
-
-
+public String passwordError()
+{
+	try {
+		return(passwordErrorMsg.getText());
+	}catch(Exception e) {
+		return(e.getMessage());
+	}
+}
 
 }

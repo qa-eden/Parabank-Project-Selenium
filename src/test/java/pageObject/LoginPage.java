@@ -37,6 +37,15 @@ public class LoginPage extends BasePage {
 	}
 	
 	//2. Login Action
+	
+	public void Login(String username, String password)
+	{
+		txtUsername.sendKeys(username);
+		txtPassword.sendKeys(password);
+		btnLogin.click();	
+	}
+	
+	
 	public void inputUsername(String value)
 	{
 		txtUsername.sendKeys(value);
@@ -55,6 +64,11 @@ public class LoginPage extends BasePage {
 	public void clickLogout()
 	{
 		btnLogout.click();
+	}
+	
+	public void clickRegister()
+	{
+		btnRegister.click();
 	}
 	
 	public Boolean isAccountsOverviewDisplayed()
