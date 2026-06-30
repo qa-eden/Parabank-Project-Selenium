@@ -69,21 +69,34 @@ public class AccountOverviewTest extends BaseClass{
 		}
 	}
 	
+	@Test(priority=4, description="TC_Acct_004 - View Account Activity")
+	public void viewAccountActivity()
+	{
+		LoginPage lp=new LoginPage(driver);
+		lp.Login(p.getProperty("username"), p.getProperty("password"));
+		
+		HomePage hp=new HomePage(driver);
+		hp.clickAccountOverview();
+		
+		AccountOverviewPage acc=new AccountOverviewPage(driver);
+		acc.clickFirstAccount();
+		acc.validateSuccessMessage();
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	@Test(priority=5, description="TC_Acct_005 - View Account Balance")
+	public void viewAccountBalance()
+	{
+		LoginPage lp=new LoginPage(driver);
+		lp.Login(p.getProperty("username"), p.getProperty("password"));
+		
+		HomePage hp=new HomePage(driver);
+		hp.clickAccountOverview();
+		
+		AccountOverviewPage acc=new AccountOverviewPage(driver);
+		Assert.assertTrue(acc.accountBalanceDisplayed(), "Balances were not displayed correctly");
+		Assert.assertTrue(acc.isTotalBalanceCorrect(), "Calculated total balance did not match the displayed total");
+		
+		System.out.println(acc.isTotalBalanceCorrect());
+	}
 }
+

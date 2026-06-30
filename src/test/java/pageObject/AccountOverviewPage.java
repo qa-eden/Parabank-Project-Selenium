@@ -22,6 +22,9 @@ public class AccountOverviewPage extends BasePage{
 	@FindBy(xpath="//select[@id='fromAccountId']") WebElement accountFrom;
 	@FindBy(xpath="//input[@value='Open New Account']") WebElement btnOpenAccount;
 	@FindBy(xpath="//h1[normalize-space()='Account Opened!']") WebElement txtAccountOpened;
+	@FindBy(xpath="//table[@id='accountTable']//tbody/tr[td/a]//td[1]//a") WebElement btnFirstAccount;
+	@FindBy(xpath="//h1[normalize-space()='Account Details']") WebElement successMsg;
+	@FindBy(xpath = "//table[@id='accountTable']/tbody/tr[last()]/td[2]") WebElement totalBalanceCell;
 	
 	
 	// Actions
@@ -95,5 +98,53 @@ public class AccountOverviewPage extends BasePage{
 		}
 		
 	}
+	
+	public void clickFirstAccount()
+	{
+		btnFirstAccount.click();
+	}
+	
+	public String validateSuccessMessage()
+	{
+		try{
+			return successMsg.getText();
+		} catch(Exception e)
+		{
+			return e.getMessage();
+		}
+	}
+	
+	public boolean isTotalBalanceCorrect()
+	{
+		try {
+			double calculatedTotal = 0;
+
+			for(WebElement row : accountRows) {
+				WebElement balanceCell = row.findElement(By.xpath(".//td[2]"));
+				String balanceText = balanceCell.getText();
+				
+				double amount = parseAmount(balanceText);
+				calculatedTotal += amount;
+			}
+
+			String displayedTotalText = totalBalanceCell.getText();
+			double displayedTotal = parseAmount(displayedTotalText);
+
+			return calculatedTotal == displayedTotal;
+
+		} catch(Exception e) {
+			return false;
+		}
+	}
+
+	private double parseAmount(String rawText)
+	{
+		String cleaned = rawText
+			.replace("$", "")
+			.replace(",", "")
+			.trim();
+		return Double.parseDouble(cleaned);
+	}
+	
 	
 }
